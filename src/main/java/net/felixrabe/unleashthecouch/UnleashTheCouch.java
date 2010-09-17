@@ -18,17 +18,26 @@
  */
 
 package net.felixrabe.unleashthecouch;
+import edu.umd.cs.piccolo.PLayer;
+import edu.umd.cs.piccolo.nodes.PText;
+import edu.umd.cs.piccolox.PFrame;
 
-/**
- * @author Felix Rabe
- * 
- */
-public class UnleashTheCouch {
+public class UnleashTheCouch extends PFrame {
+    
+    private static final long serialVersionUID = 1L;
+    
+    public UnleashTheCouch() {
+        super("Unleash The Couch", false, null);
+    }
 
-    /**
-     * @param args
-     */
+    public void initialize() {
+        final PLayer layer = getCanvas().getLayer();
+        layer.addChild(new PText("URL of CouchDB database:"));
+        // layer.addChild(new PText("Example: http://localhost:5984/employees"));
+    }
+    
     public static void main(String[] args) {
+        new UnleashTheCouch();
     }
 
 }
