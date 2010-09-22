@@ -4,6 +4,8 @@
   <groupId>net.felixrabe.unleashthecouch</groupId>
   <artifactId>unleashthecouch</artifactId>
   <version>0.1-SNAPSHOT</version>
+  <name>unleashthecouch</name>
+  <url>http://github.com/felixrabe/unleashthecouch</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
