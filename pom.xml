@@ -29,4 +29,24 @@
     </dependency>
   </dependencies>
 
+<build>
+<plugins>
+
+<plugin>
+  <artifactId>maven-assembly-plugin</artifactId>
+         <configuration>
+           <descriptorRefs>
+             <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <archive>
+            <manifest>
+              <mainClass>net.felixrabe.unleashthecouch.UnleashTheCouch</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+</plugin>
+
+</plugins>
+</build>
+
 </project>
