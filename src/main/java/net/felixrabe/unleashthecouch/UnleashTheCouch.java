@@ -20,6 +20,8 @@
 package net.felixrabe.unleashthecouch;
 import edu.umd.cs.piccolo.PLayer;
 import edu.umd.cs.piccolo.PNode;
+import edu.umd.cs.piccolo.event.PBasicInputEventHandler;
+import edu.umd.cs.piccolo.event.PInputEvent;
 import edu.umd.cs.piccolo.nodes.PPath;
 import edu.umd.cs.piccolo.nodes.PText;
 import edu.umd.cs.piccolox.PFrame;
@@ -37,7 +39,26 @@ public class UnleashTheCouch extends PFrame {
         final PLayer layer = getCanvas().getLayer();
         PNode text = new PText("URL of CouchDB database:");
         layer.addChild(text);
-        // layer.addChild(new PText("Example: http://localhost:5984/employees"));
+        
+        PPath rect = PPath.createRectangle(0, 0, 100, 100);
+        layer.addChild(rect);
+        
+        rect.translate(100, 100);
+        PBoundsHandle.addBoundsHandlesTo(rect);
+        
+        rect.addInputEventListener(new PBasicInputEventHandler() {
+            public void keyTyped(final PInputEvent event) {
+                System.out.println("key");
+            }
+
+            public void mouseEntered(final PInputEvent event) {
+                event.getInputManager().setKeyboardFocus(event.getPath());
+            }
+
+            public void mouseExited(final PInputEvent event) {
+                event.getInputManager().setKeyboardFocus(null);
+            }
+        });
     }
     
     public static void main(String[] args) {
