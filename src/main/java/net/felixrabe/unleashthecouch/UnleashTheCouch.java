@@ -19,8 +19,11 @@
 
 package net.felixrabe.unleashthecouch;
 import edu.umd.cs.piccolo.PLayer;
+import edu.umd.cs.piccolo.PNode;
+import edu.umd.cs.piccolo.nodes.PPath;
 import edu.umd.cs.piccolo.nodes.PText;
 import edu.umd.cs.piccolox.PFrame;
+import edu.umd.cs.piccolox.handles.PBoundsHandle;
 
 public class UnleashTheCouch extends PFrame {
     
@@ -32,7 +35,8 @@ public class UnleashTheCouch extends PFrame {
 
     public void initialize() {
         final PLayer layer = getCanvas().getLayer();
-        layer.addChild(new PText("URL of CouchDB database:"));
+        PNode text = new PText("URL of CouchDB database:");
+        layer.addChild(text);
         // layer.addChild(new PText("Example: http://localhost:5984/employees"));
     }
     
