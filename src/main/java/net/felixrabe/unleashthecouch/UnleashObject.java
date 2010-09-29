@@ -22,12 +22,19 @@ import org.codehaus.jackson.JsonNode;
 
 /**
  * @author Felix Rabe
- *
+ * 
  */
 public class UnleashObject {
+    
+    protected final static String UNLEASHTHECOUCH_VIEW_TYPE = "unleashthecouch (Piccolo2D/Java2D) view";
+
+    private JsonNode jsonRootNode;
 
     public UnleashObject(JsonNode jsonRootNode) {
-        System.out.println(jsonRootNode);
+        this.jsonRootNode = jsonRootNode;
     }
 
+    public String getType() {
+        return Utils.getStringFromObject(jsonRootNode, "@Type", UNLEASHTHECOUCH_VIEW_TYPE);
+    }
 }

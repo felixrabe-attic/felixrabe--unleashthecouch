@@ -79,4 +79,14 @@ public class Utils {
         return null;
     }
     
+    public static String getStringFromObject(JsonNode jsonNode, String fieldName, String defaultString) {
+        JsonNode typeNode = jsonNode.get(fieldName);
+        if (typeNode == null)
+            return defaultString;
+        String typeStr = typeNode.getTextValue();
+        if (typeStr == null)
+            return defaultString;
+        return typeStr;
+    }
+    
 }

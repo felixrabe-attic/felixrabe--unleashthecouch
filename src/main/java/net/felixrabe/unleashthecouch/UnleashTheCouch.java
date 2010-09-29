@@ -40,7 +40,8 @@ public class UnleashTheCouch extends PFrame {
 
     public void initialize() {
         final PLayer layer = getCanvas().getLayer();
-        PNode text = new PText("URL of CouchDB database:");
+        
+        PNode text = new PText(rootObject.getType());
         layer.addChild(text);
         
         PPath rect = PPath.createRectangle(0, 0, 100, 100);
