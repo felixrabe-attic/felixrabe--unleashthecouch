@@ -31,8 +31,11 @@ public class UnleashTheCouch extends PFrame {
     
     private static final long serialVersionUID = 1L;
     
-    public UnleashTheCouch() {
+    private UnleashObject rootObject;
+    
+    public UnleashTheCouch(UnleashObject rootObject) {
         super("Unleash The Couch", false, null);
+        this.rootObject = rootObject;
     }
 
     public void initialize() {
@@ -62,7 +65,13 @@ public class UnleashTheCouch extends PFrame {
     }
     
     public static void main(String[] args) {
-        new UnleashTheCouch();
+        if (args.length != 1) {
+            System.out.println("Usage: UnleashTheCouch http://yourhost:port/database/docid");
+            System.exit(1);
+        }
+        String couchDbDocUrl = args[0];
+        UnleashObject rootObject = Utils.openObject(couchDbDocUrl);
+        new UnleashTheCouch(rootObject);
     }
 
 }
