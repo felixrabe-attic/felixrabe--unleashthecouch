@@ -24,7 +24,7 @@
     </dependency>
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
-      <artifactId>jackson-core-lgpl</artifactId>
+      <artifactId>jackson-mapper-lgpl</artifactId>
       <version>1.6.0</version>
     </dependency>
   </dependencies>
