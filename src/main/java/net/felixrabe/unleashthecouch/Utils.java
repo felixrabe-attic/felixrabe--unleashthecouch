@@ -18,8 +18,15 @@
  */
 package net.felixrabe.unleashthecouch;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -31,7 +38,24 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class Utils {
 
     public static String getDocument(String couchDbDocUrl) {
-        return "{}";
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpGet httpGet = new HttpGet(couchDbDocUrl);
+        HttpResponse response = null;
+        try {
+            response = httpClient.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                entity.writeTo(baos);
+                return new String(baos.toByteArray(), "UTF-8");
+            }
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return null;
     }
     
     /**

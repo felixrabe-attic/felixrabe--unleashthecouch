@@ -27,6 +27,7 @@ import org.codehaus.jackson.JsonNode;
 public class UnleashObject {
 
     public UnleashObject(JsonNode jsonRootNode) {
+        System.out.println(jsonRootNode);
     }
 
 }
