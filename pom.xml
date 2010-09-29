@@ -23,20 +23,19 @@
       <version>4.0.2</version>
     </dependency>
     <dependency>
-    	<groupId>org.codehaus.jackson</groupId>
-    	<artifactId>jackson-core-lgpl</artifactId>
-    	<version>1.6.0</version>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-core-lgpl</artifactId>
+      <version>1.6.0</version>
     </dependency>
   </dependencies>
 
-<build>
-<plugins>
-
-<plugin>
-  <artifactId>maven-assembly-plugin</artifactId>
-         <configuration>
-           <descriptorRefs>
-             <descriptorRef>jar-with-dependencies</descriptorRef>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
           <archive>
             <manifest>
@@ -44,9 +43,8 @@
             </manifest>
           </archive>
         </configuration>
-</plugin>
-
-</plugins>
-</build>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
