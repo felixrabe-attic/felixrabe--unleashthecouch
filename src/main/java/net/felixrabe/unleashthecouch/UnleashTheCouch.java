@@ -34,11 +34,8 @@ public class UnleashTheCouch extends PFrame {
     }
 
     public void initialize() {
-        final PCanvas canvas = getCanvas();
-        final PLayer layer = canvas.getLayer();
-        
-        canvas.removeInputEventListener(canvas.getZoomEventHandler());
-        canvas.removeInputEventListener(canvas.getPanEventHandler());
+        getCanvas().removeInputEventListener(getCanvas().getZoomEventHandler());
+        getCanvas().removeInputEventListener(getCanvas().getPanEventHandler());
     }
     
     public static void main(String[] args) {
