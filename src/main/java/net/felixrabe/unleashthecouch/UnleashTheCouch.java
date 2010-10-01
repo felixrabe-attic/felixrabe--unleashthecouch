@@ -18,6 +18,11 @@
  */
 
 package net.felixrabe.unleashthecouch;
+import java.io.IOException;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonProcessingException;
+
 import edu.umd.cs.piccolo.PCanvas;
 import edu.umd.cs.piccolo.PLayer;
 import edu.umd.cs.piccolox.PFrame;
@@ -26,11 +31,12 @@ public class UnleashTheCouch extends PFrame {
     
     private static final long serialVersionUID = 1L;
     
-    private UnleashObject viewObject;
+    JsonNode jsonNode;
     
-    public UnleashTheCouch(UnleashObject viewObject) {
+    public UnleashTheCouch(String couchDbDocUrl) throws JsonProcessingException, IOException {
         super("Unleash The Couch", false, null);
-        this.viewObject = viewObject;
+        JsonNode jsonNode = Utils.getJSON(couchDbDocUrl);
+        this.jsonNode = jsonNode;
     }
 
     public void initialize() {
@@ -44,8 +50,13 @@ public class UnleashTheCouch extends PFrame {
             System.exit(1);
         }
         String couchDbDocUrl = args[0];
-        UnleashObject viewObject = Utils.openObject(couchDbDocUrl);
-        new UnleashTheCouch(viewObject);
+        try {
+            new UnleashTheCouch(couchDbDocUrl);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

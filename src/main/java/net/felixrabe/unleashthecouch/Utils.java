@@ -59,34 +59,12 @@ public class Utils {
     }
     
     /**
-     * @param couchDbDocUrl
-     * @return UnleashObject representing the CouchDB document
+     * @return JsonNode representing the CouchDB document
      */
-    public static UnleashObject openObject(String couchDbDocUrl) {
+    public static JsonNode getJSON(String couchDbDocUrl) throws JsonProcessingException, IOException {
         String jsonString = Utils.getDocument(couchDbDocUrl);
         ObjectMapper jsonObjectMapper = new ObjectMapper();
-        try {
-            JsonNode jsonRootNode = jsonObjectMapper.readTree(jsonString);
-            UnleashObject obj = new UnleashObject(jsonRootNode);
-            return obj;
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    public static String getStringFromObject(JsonNode jsonNode, String fieldName, String defaultString) {
-        JsonNode typeNode = jsonNode.get(fieldName);
-        if (typeNode == null)
-            return defaultString;
-        String typeStr = typeNode.getTextValue();
-        if (typeStr == null)
-            return defaultString;
-        return typeStr;
+        return jsonObjectMapper.readTree(jsonString);
     }
     
 }
