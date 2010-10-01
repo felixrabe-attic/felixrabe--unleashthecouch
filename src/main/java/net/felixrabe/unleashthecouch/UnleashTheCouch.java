@@ -18,14 +18,9 @@
  */
 
 package net.felixrabe.unleashthecouch;
+import edu.umd.cs.piccolo.PCanvas;
 import edu.umd.cs.piccolo.PLayer;
-import edu.umd.cs.piccolo.PNode;
-import edu.umd.cs.piccolo.event.PBasicInputEventHandler;
-import edu.umd.cs.piccolo.event.PInputEvent;
-import edu.umd.cs.piccolo.nodes.PPath;
-import edu.umd.cs.piccolo.nodes.PText;
 import edu.umd.cs.piccolox.PFrame;
-import edu.umd.cs.piccolox.handles.PBoundsHandle;
 
 public class UnleashTheCouch extends PFrame {
     
@@ -39,7 +34,11 @@ public class UnleashTheCouch extends PFrame {
     }
 
     public void initialize() {
-        final PLayer layer = getCanvas().getLayer();
+        final PCanvas canvas = getCanvas();
+        final PLayer layer = canvas.getLayer();
+        
+        canvas.removeInputEventListener(canvas.getZoomEventHandler());
+        canvas.removeInputEventListener(canvas.getPanEventHandler());
     }
     
     public static void main(String[] args) {
