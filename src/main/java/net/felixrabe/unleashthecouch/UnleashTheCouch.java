@@ -40,29 +40,6 @@ public class UnleashTheCouch extends PFrame {
 
     public void initialize() {
         final PLayer layer = getCanvas().getLayer();
-        
-        PNode text = new PText(rootObject.getType());
-        layer.addChild(text);
-        
-        PPath rect = PPath.createRectangle(0, 0, 100, 100);
-        layer.addChild(rect);
-        
-        rect.translate(100, 100);
-        PBoundsHandle.addBoundsHandlesTo(rect);
-        
-        rect.addInputEventListener(new PBasicInputEventHandler() {
-            public void keyTyped(final PInputEvent event) {
-                System.out.println("key");
-            }
-
-            public void mouseEntered(final PInputEvent event) {
-                event.getInputManager().setKeyboardFocus(event.getPath());
-            }
-
-            public void mouseExited(final PInputEvent event) {
-                event.getInputManager().setKeyboardFocus(null);
-            }
-        });
     }
     
     public static void main(String[] args) {
