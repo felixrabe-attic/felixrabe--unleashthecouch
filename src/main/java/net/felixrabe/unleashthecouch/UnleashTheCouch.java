@@ -18,30 +18,59 @@
  */
 
 package net.felixrabe.unleashthecouch;
+import java.awt.Color;
 import java.io.IOException;
+import java.util.Iterator;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 
-import edu.umd.cs.piccolo.PCanvas;
 import edu.umd.cs.piccolo.PLayer;
+import edu.umd.cs.piccolo.PNode;
+import edu.umd.cs.piccolo.nodes.PText;
 import edu.umd.cs.piccolox.PFrame;
 
 public class UnleashTheCouch extends PFrame {
     
     private static final long serialVersionUID = 1L;
     
+    private String couchDbDocUrl;
     JsonNode jsonNode;
     
     public UnleashTheCouch(String couchDbDocUrl) throws JsonProcessingException, IOException {
         super("Unleash The Couch", false, null);
-        JsonNode jsonNode = Utils.getJSON(couchDbDocUrl);
-        this.jsonNode = jsonNode;
+        this.couchDbDocUrl = couchDbDocUrl;
+        initializeLater();
+    }
+
+    private void initializeLater() {
+        JsonNode json;
+        try {
+            json = Utils.getJSON(couchDbDocUrl);
+        } catch (JsonProcessingException e) {
+            return;
+        } catch (IOException e) {
+            return;
+        }
+        
+        PLayer layer = getCanvas().getLayer();
+        
+        for (Iterator<String> it = json.getFieldNames(); it.hasNext(); ) {
+            String fieldName = it.next();
+            if (!fieldName.startsWith("show:"))
+                continue;
+            PNode node = new PNode();
+            JsonNode subJson = json.get(fieldName);
+            JsonNode x = subJson.get("x");
+            node.setBounds(subJson.get("x").getValueAsInt(),
+                    subJson.get("y").getValueAsInt(), 30, 30);
+            node.setPaint(Color.ORANGE);
+            layer.addChild(node);
+        }
+        getCanvas().repaint();
     }
 
     public void initialize() {
-        getCanvas().removeInputEventListener(getCanvas().getZoomEventHandler());
-        getCanvas().removeInputEventListener(getCanvas().getPanEventHandler());
     }
     
     public static void main(String[] args) {
